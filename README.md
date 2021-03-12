@@ -1,5 +1,5 @@
 # pythonPanorama
-descrição PT.
+Descrição PT.
 
 Código em python, utilizando OpenCV que tenta achar pontos em comum e fazer a panorâmica de imagens que estão dentro de pastas. 
 
@@ -9,7 +9,7 @@ Requerimentos:
  - opencv-contrib-python==3.4.2.16
 
 
-description EN.
+Description EN.
 
 Python code, with OpenCV, this code try to find common points between images and stitch then together.
 
