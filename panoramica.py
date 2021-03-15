@@ -2,7 +2,7 @@ import cv2
 import os
 import numpy as np
 
-pastaPrincipal = 'Images'
+pastaPrincipal = 'Test_Images'
 minhasPastas = os.listdir(pastaPrincipal)
 imagens = []
 def recorte(frame):
@@ -24,14 +24,14 @@ def panoramica(img):
     iPanoramica = []
     for i in range (0,len(img)-1):
         if(i == 0):
-            img[i] = cv2.resize(img[i],(0,0),None,0.2,0.2) #Redimensiona multiplicando a resolução atual pelo fator definido
+            #img[i] = cv2.resize(img[i],(0,0),None,0.2,0.2) #Redimensiona multiplicando a resolução atual pelo fator definido
             img1 = cv2.cvtColor(img[i],cv2.COLOR_BGR2GRAY) #Passa para escala de cinza
-            img[i+1] = cv2.resize(img[i+1],(0,0),None,0.2,0.2) #Redimensiona multiplicando a resolução atual pelo fator definido 
+            #img[i+1] = cv2.resize(img[i+1],(0,0),None,0.2,0.2) #Redimensiona multiplicando a resolução atual pelo fator definido 
             img2 = cv2.cvtColor(img[i+1],cv2.COLOR_BGR2GRAY) #Passa para escala de cinza
         else:
             img[i] = iPanoramica #Substitui a imagem já usada na iteração anterior pela panoramica atual
             img1 = cv2.cvtColor(img[i],cv2.COLOR_BGR2GRAY) #Passa para escala de cinza
-            img[i+1] = cv2.resize(img[i+1],(0,0),None,0.2,0.2) #Redimensiona multiplicando a resolução atual pelo fator definido
+            img[i+1] = cv2.resize(img[i+1],(0,0),None,0.8,0.8) #Redimensiona multiplicando a resolução atual pelo fator definido
             img2 = cv2.cvtColor(img[i+1],cv2.COLOR_BGR2GRAY) #Passa para escala de cinza
             
         sift = cv2.xfeatures2d.SIFT_create()
@@ -82,10 +82,7 @@ for pasta in minhasPastas:
     print(f"Numero total de imagens detectadas {len(minhaLista)}")
     for nomeImagem in minhaLista:
         imagemAtual = cv2.imread(f"{local}/{nomeImagem}")
-        if pasta == "2":
-           imagemAtual = cv2.resize(imagemAtual,(0,0),None,4,4) #O resize acontece pq estas são imagens em baixa resolução
-        if pasta == "10":
-           imagemAtual = cv2.resize(imagemAtual,(0,0),None,16,16) #O resize acontece pq estas são imagens em alta resolução
+        imagemAtual = cv2.resize(imagemAtual,(0,0),None,0.8,0.8) #O resize acontece para o processamento mais rapido
         imagens.append(imagemAtual)
         
     panoramicaR = panoramica(imagens)
@@ -97,5 +94,9 @@ for pasta in minhasPastas:
         
     imagens = []
     
-    
-cv2.waitKey(1)
+
+cv2.waitKey()
+
+cv2.destroyAllWindows()
+
+
