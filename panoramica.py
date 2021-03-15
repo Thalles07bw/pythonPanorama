@@ -23,10 +23,8 @@ def recorte(frame):
 def panoramica(img):
     iPanoramica = []
     for i in range (0,len(img)-1):
-        if(i == 0):
-            #img[i] = cv2.resize(img[i],(0,0),None,0.2,0.2) #Redimensiona multiplicando a resolução atual pelo fator definido
+        if(i == 0):        
             img1 = cv2.cvtColor(img[i],cv2.COLOR_BGR2GRAY) #Passa para escala de cinza
-            #img[i+1] = cv2.resize(img[i+1],(0,0),None,0.2,0.2) #Redimensiona multiplicando a resolução atual pelo fator definido 
             img2 = cv2.cvtColor(img[i+1],cv2.COLOR_BGR2GRAY) #Passa para escala de cinza
         else:
             img[i] = iPanoramica #Substitui a imagem já usada na iteração anterior pela panoramica atual
@@ -50,11 +48,7 @@ def panoramica(img):
             if m.distance < 0.5*n.distance:
                 good.append(m)
         print(len(good))
-        draw_params = dict(matchColor = (0,255,0), # desenha os pontos mais proximos em verde
-                   singlePointColor = None,
-                   flags = 2)
-
-
+        
         MIN_MATCH_COUNT = 10
         if len(good) > MIN_MATCH_COUNT:
             src_pts = np.float32([ kp1[m.queryIdx].pt for m in good ]).reshape(-1,1,2)
